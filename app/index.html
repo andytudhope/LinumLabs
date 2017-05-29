@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Standard Token - Truffle Webpack Demo w/ Frontend</title>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <script src="./app.js"></script>
+</head>
+<body>
+  <h1>Standard Token</h1>
+  <h2>Example Token Demo for Linum Labs</h2>
+
+  <br>
+  <h1>Create Tokens</h1>
+  <br><label for="amount">Initial Amount:</label><input type="text" id="amount" placeholder="e.g., 95"></input>
+  <br><label for="name">Name of the Token:</label><input type="text" id="name" placeholder="e.g., AndyCoin"></input>
+  <br><label for="decimal">Decimal Units:</label><input type="text" id="decimal" placeholder="e.g., 2"></input>
+  <br><label for="symbol">Symbol:</label><input type="text" id="symbol" placeholder="e.g., ACT"></input>
+  <br><br><button id="send" onclick="App.createToken()">Create Your Token!</button>
+  <br>
+
+  <br>
+  <h1>Send Tokens</h1>
+  <br><label for="samount">Amount to send:</label><input type="text" id="samount" placeholder="e.g., 95"></input>
+  <br><label for="sto">Recipient:</label><input type="text" id="sto" placeholder="e.g., 0x00ansydeadbeef..."></input>
+  <br><br><button id="send" onclick="App.sendToken()">Send Your Token!</button>
+  <br>
+
+  <span class="hint"><strong>Hint:</strong> open the browser developer console to view any errors and warnings.</span>
+</body>
+</html>
