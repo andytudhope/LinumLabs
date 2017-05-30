@@ -72,16 +72,6 @@ window.App = {
       console.log("And your receipt, kind human: ")
       console.log(receipt);
 
-      // Generally speaking, you need to use getTransactionReceipt to be sure that you tx has been confirmed.
-      // However, with testrpc, you can just access the receipt as above.
-      // The reason I have added a callback fn here is because it makes the request asynchronous,
-      // which works much better on real networks where it takes time to mine and confirm transactions.
-      // Generally speaking, you would add some sort of timeout function in there to make sure that you
-      // give the chain long enough to get back to you ;)
-
-      // web3.eth.getTransactionReceipt(txHash, function(res) {
-      //   console.log(res);
-      // });
     }).catch(function(e) {
       console.log(e);
       console.log("Error sending coin; see log.");
@@ -116,7 +106,7 @@ window.App = {
       // However, with testrpc, you can just access the receipt as above.
       // The reason I have added a callback fn here is because it makes the request asynchronous,
       // which works much better on real networks where it takes time to mine and confirm transactions.
-      // Generally speaking, you would add some sort of timeout function in there to make sure that you
+      // It would be a good idea to add some sort of timeout function in there to make sure that you
       // give the chain long enough to get back to you ;) I also show you how to take a look through the
       // logs, which is much more useful when using an asynchronous function to get the transaction receipt and filter
       // for specific events you are interested in, rather than the generic "event" I have gone for here.
@@ -124,6 +114,10 @@ window.App = {
       // web3.eth.getTransactionReceipt(txHash, function(res) {
       //   console.log(res);
       // });
+
+      // Now, I'm just going to filter through the logs to show you that it can be done to return specific info about
+      // what the transaction was composed of and who did what when. You'll notice the when part is very easy to establish by
+      // just looking at the blockNumber in the tx receipt. Looking at the data is a touch more complex...
 
       var log = receipt.logs[0];
       var event = null;
