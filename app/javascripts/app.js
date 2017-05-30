@@ -64,8 +64,24 @@ window.App = {
     HumanStandard.deployed().then(function(instance) {
       token = instance;
       return token.transfer(to, amount, {from: account, gas: 3000000})
-    }).then(function() {
-      console.log("Transaction complete!");
+    }).then(function(res) {
+      var txHash = res.tx;
+      console.log("The tx hash is: " + txHash);
+
+      var receipt = res.receipt;
+      console.log("And your receipt, kind human: ")
+      console.log(receipt);
+
+      // Generally speaking, you need to use getTransactionReceipt to be sure that you tx has been confirmed.
+      // However, with testrpc, you can just access the receipt as above.
+      // The reason I have added a callback fn here is because it makes the request asynchronous,
+      // which works much better on real networks where it takes time to mine and confirm transactions.
+      // Generally speaking, you would add some sort of timeout function in there to make sure that you
+      // give the chain long enough to get back to you ;)
+
+      // web3.eth.getTransactionReceipt(txHash, function(res) {
+      //   console.log(res);
+      // });
     }).catch(function(e) {
       console.log(e);
       console.log("Error sending coin; see log.");
@@ -89,8 +105,27 @@ window.App = {
       token = instance;
       return token.createHumanStandardToken(amount, name, decimal, symbol, {from: account, gas: 3000000});
     }).then(function(res) {
-      var logs = res.receipt.logs;
-      var log = logs[0];
+      var txHash = res.tx;
+      console.log("The tx hash is: " + txHash);
+
+      var receipt = res.receipt;
+      console.log("And your receipt, kind human: ")
+      console.log(receipt);
+
+      // Generally speaking, you need to use getTransactionReceipt to be sure that you tx has been confirmed.
+      // However, with testrpc, you can just access the receipt as above.
+      // The reason I have added a callback fn here is because it makes the request asynchronous,
+      // which works much better on real networks where it takes time to mine and confirm transactions.
+      // Generally speaking, you would add some sort of timeout function in there to make sure that you
+      // give the chain long enough to get back to you ;) I also show you how to take a look through the
+      // logs, which is much more useful when using an asynchronous function to get the transaction receipt and filter
+      // for specific events you are interested in, rather than the generic "event" I have gone for here.
+
+      // web3.eth.getTransactionReceipt(txHash, function(res) {
+      //   console.log(res);
+      // });
+
+      var log = receipt.logs[0];
       var event = null;
       var abi = human_standard_artifacts.abi;
 
@@ -108,9 +143,9 @@ window.App = {
       if (event != null) {
       var inputs = event.inputs.map(function(input) {return input.type;});
       var data = SolidityCoder.decodeParams(inputs, log.data.replace("0x", ""));
-          console.log("Address " + data[0].toString())
+          console.log("You created " + parseInt(data[0], 16) + " coins. Go you!")
       }
-
+      
     }).catch(function(e) {
       console.log(e);
       console.log("Error sending coin; see log.");
