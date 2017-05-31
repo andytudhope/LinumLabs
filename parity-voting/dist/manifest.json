@@ -1,0 +1,8 @@
+{
+	"id": "parity-voting",
+	"name": "Voting Demo",
+	"description": "A simple dapp for voting",
+	"version": "0.1",
+	"author": "Andy Tudhope",
+	"iconUrl": "title.png"
+}
