@@ -1,0 +1,9 @@
+{
+    "id": "parity_demo",
+    "name": "Linum Demo",
+    "description": "A Linum demo dapp",
+    "version": "0.1",
+    "author": "Linum Labs",
+    "iconUrl": "title.png"
+}
+
